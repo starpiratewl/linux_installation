@@ -8,7 +8,28 @@
 ##2. The CentOS 6.8 installation enable you to select the install models and select the relating sofewares. I happen to choose the minimal but after installation, it turns out that there is only a terminal after land on. That's not what I want, so it is better to choose the desktop model.
 
 ##3. After installation of the desktop model of CentOS, it is confusing that the system can not start without the installation USB flash driver...
+
+
+
+
 ## Reason: there must be some problem with the GRUB. Fortunately we have method to fix this:
 
-
+##Method 1
+##1,switch to root
+###su -- root
+##2,enter the grub model
+#grub
+##3,follow there steps
+###grub>find /boot/grub/stage1  --or-- find /grub/stage1
+## remember the return values , in most situation it will be like (hd0,5)
+##grub>quit
+##4,edit the grub.conf
+###vim /boot/grub/grub.conf
+##substitute all the values like (hdx,y) with the values we got in the step3
+##5,reenter the grub model to execute the following steps, note there are space in the following to orders.
+##grub>root  (hdx,y)   
+##grub>setup (hdx)
+##grub>quit
+##6、restart
+###shutdown -r now
 
