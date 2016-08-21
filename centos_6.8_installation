@@ -34,3 +34,86 @@
 ##6、restart
 ###shutdown -r now
 
+
+
+## method 2
+1.进入centos后打开终端用root用户进入grub模式
+#grub   
+grub>  find /grub/stage1 
+Error 15: File not found
+这是我的电脑出现的，再输入
+grub>find /boot/grub/stage1  find stage1 
+find /boot/grub/stage1 find stage1
+(hd0,7)
+
+2.将CentOS的grub安装到MBR
+
+grub> root (hd0,7)
+grub> setup (hd0)
+
+这里要和上面find里查到的一致hd0表示第一块硬盘 0表示第一个分区
+3.重启完成
+grub> reboot
+
+4.最后用vim修改/boot/grub/grub.conf，把所有(hd0,0）改成与前面find找到的一致，title others 改成 title windowsXP，我的是XP系统是在硬盘的第一个分区就是(hd0,0)。
+#          all kernel and initrd paths are relative to /, eg.
+#          root (hd1,7)
+#          kernel /boot/vmlinuz-version ro root=/dev/sda8
+#          initrd /boot/initrd-[generic-]version.img
+#boot=/dev/sdb
+default=0
+timeout=5
+splashimage=(hd0,7)/boot/grub/splash.xpm.gz
+title CentOS (2.6.32-358.2.1.el6.i686)
+        root (hd0,7)
+        kernel /boot/vmlinuz-2.6.32-358.2.1.el6.i686 ro root=UUID=73023ee3-a312-49e7-990c-89a74f7bf89a rd_NO_LUKS  KEYBOARDTYPE=pc KEYTABLE=us rd_NO_MD LANG=zh_CN.UTF-8 rd_NO_LVM rd_NO_DM rhgb quiet crashkernel=auto
+        initrd /boot/initramfs-2.6.32-358.2.1.el6.i686.img
+title CentOS (2.6.32-358.el6.i686)
+        root (hd0,7)
+        kernel /boot/vmlinuz-2.6.32-358.el6.i686 ro root=UUID=73023ee3-a312-49e7-990c-89a74f7bf89a rd_NO_LUKS  KEYBOARDTYPE=pc KEYTABLE=us rd_NO_MD LANG=zh_CN.UTF-8 rd_NO_LVM rd_NO_DM rhgb quiet
+        initrd /boot/initramfs-2.6.32-358.el6.i686.img
+title windowsXP
+        rootnoverify (hd0,0)
+        chainloader +1
+                                                              23,2-9   
+然后重新启动就可以看到启动菜单了，从此摆脱U盘启动。
+
+
+##method 3
+1.首先查看分区
+#df -k
+/dev/sda5 /
+tmpfs /dev/shm
+/dev/sda1 /boot
+/dev/sda2 /home
+这里我的/boot是在sda1 就是第0块分区
+
+2.root用户进入grub模式
+#sbin/grub 
+grub> find /grub/stage1 
+
+find /grub/stage1
+(hd0,0)
+
+
+
+我的是这个命令找到的，如果你没找到你可以试试 find /boot/grub/stage1 find stage1 
+
+
+3.将CentOS的grub安装到MBR
+
+grub> root (hd0,0)
+grub> setup (hd0)
+
+这里要和上面find里查到的一致hd0表示第一块硬盘 0表示第一个分区
+4.重启完成
+grub> reboot
+
+5.修改grub.conf和menu.lst
+splashimage=(hd0,0)/grub/splash.xpm.gz
+hiddenmenu
+title CentOS (2.6.32-279.el6.i686)
+root (hd0,0)
+到此就全部完成了， 下次开机就可以摆脱U盘启动了。
+
+
