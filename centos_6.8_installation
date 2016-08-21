@@ -9,8 +9,9 @@
 
 ##3. After installation of the desktop model of CentOS, it is confusing that the system can not start without the installation USB flash driver...
 
+## if choose the use all space, the installation process will set the partition of disk for you, and this error will be avoided
 
-
+## if choose the custom layout, we have to set the partition by ourselves and this error may occur. Because the GRUB might be installed on the USB flash driver instead of the the disk.
 
 ## Reason: there must be some problem with the GRUB. Fortunately we have method to fix this:
 
