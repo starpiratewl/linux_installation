@@ -127,6 +127,12 @@ root (hd0,0)
 ##When we partition the disk the MBR can only remember four main partitions or three main partition and one logic partition. If we have too many main partition, there will be the error. so we can set the partition ready for linux installation to logic partition to avoid this problem.
 ## And never never forgot to make backup of all data!!!!!!!!!!!!!!!!!!!!!!!!!
 
+## reference link:
+http://bbs.hh010.com/thread-273980-1-1.html
+http://blog.sina.com.cn/s/blog_786c7fd70101970v.html
+http://blog.csdn.net/wjeson/article/details/9054331
+
+
 
 
 
