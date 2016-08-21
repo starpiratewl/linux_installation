@@ -3,6 +3,10 @@
 ##There are several problems may lie in the process
 
 ##1. the computer stuck after the screen prompt information: "Press enter to begin the installation process". Press the enter but there are no responses.
-## Reason: the file /sys have some problems, we have to substitute with new files. then we can go on with the installation process.
+## Reason: the file /sys /vesamenu.c32 have some problems, we have to substitute with new vesamenu.c32 files. then we can go on with the installation process.
+
+##2. The CentOS 6.8 installation enable you to select the install models and select the relating sofewares. I happen to choose the minimal but after installation, it turns out that there is only a terminal after land on. That's not what I want, so it is better to choose the desktop model.
+
+##3.
 
 
