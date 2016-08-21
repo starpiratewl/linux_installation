@@ -124,7 +124,9 @@ root (hd0,0)
 ## The reason of the error is that:
 出现这种情况的大概原因是:在硬盘分区的时候，win7+CentOS只能分4个主分区,或者3个主分区+1个逻辑分区.
 如果你分的全是主分区,把LINUX分区全弄成逻辑分区,应该就搞定了
-When we partition the disk the MBR can only remember four main partitions or three main partition and one logic partition. If we have too many main partition, there will be the error. so we can set the partition ready for linux installation to logic partition to avoid this problem.
+##When we partition the disk the MBR can only remember four main partitions or three main partition and one logic partition. If we have too many main partition, there will be the error. so we can set the partition ready for linux installation to logic partition to avoid this problem.
+## And never never forgot to make backup of all data!!!!!!!!!!!!!!!!!!!!!!!!!
+
 
 
 
