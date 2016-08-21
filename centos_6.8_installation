@@ -2,12 +2,12 @@
 
 ##There are several problems may lie in the process
 
-##1. the computer stuck after the screen prompt information: "Press enter to begin the installation process". Press the enter but there are no responses.
+## PROBELM_1. the computer stuck after the screen prompt information: "Press enter to begin the installation process". Press the enter but there are no responses.
 ## Reason: the file /syslinux/vesamenu.c32 have some problems, we have to substitute with new vesamenu.c32 files. then we can go on with the installation process.
 
-##2. The CentOS 6.8 installation enable you to select the install models and select the relating sofewares. I happen to choose the minimal but after installation, it turns out that there is only a terminal after land on. That's not what I want, so it is better to choose the desktop model.
+## PROBELM_2. The CentOS 6.8 installation enable you to select the install models and select the relating sofewares. I happen to choose the minimal but after installation, it turns out that there is only a terminal after land on. That's not what I want, so it is better to choose the desktop model.
 
-##3. After installation of the desktop model of CentOS, it is confusing that the system can not start without the installation USB flash driver...
+## PROBELM_3. After installation of the desktop model of CentOS, it is confusing that the system can not start without the installation USB flash driver...
 
 ## if choose the use all space, the installation process will set the partition of disk for you, and this error will be avoided
 
@@ -115,5 +115,23 @@ hiddenmenu
 title CentOS (2.6.32-279.el6.i686)
 root (hd0,0)
 到此就全部完成了， 下次开机就可以摆脱U盘启动了。
+
+
+## PROBELM_4
+
+## if we choose the custom layout, there will be another problem lurking. When we do the partition of the disk, especially when we have already installed other systems in the computer , the installation process might prompt the error:"could not allocate requested partitions:not enough free space disk", even though we are performing the right volumn partition.
+
+## The reason of the error is that:
+出现这种情况的大概原因是:在硬盘分区的时候，win7+CentOS只能分4个主分区,或者3个主分区+1个逻辑分区.
+如果你分的全是主分区,把LINUX分区全弄成逻辑分区,应该就搞定了
+When we partition the disk the MBR can only remember four main partitions or three main partition and one logic partition. If we have too many main partition, there will be the error. so we can set the partition ready for linux installation to logic partition to avoid this problem.
+
+
+
+
+
+
+
+
 
 
