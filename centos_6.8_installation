@@ -1,0 +1,8 @@
+## Download the CentOS installation ISO files, write to USB flash driver mirror, set computer to boot from USB flash driver. Install the CentOS 6.8
+
+##There are several problems may lie in the process
+
+##1. the computer stuck after the screen prompt information: "Press enter to begin the installation process". Press the enter but there are no responses.
+## Reason: the file /sys have some problems, we have to substitute with new files. then we can go on with the installation process.
+
+
