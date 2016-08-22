@@ -14,7 +14,16 @@
 ##    cd mysql
 ##    pwd
 ##    /usr/local/mysql
-##
+##    chown -R mysql .
+##    chgrp -R mysql .
+
+##    cd /usr/local/mysql/bin
+##    ./mysql_install_db --user=mysql --basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data
+
+##    cd /usr/local/mysql/support-files
+##    ./mysql.server start
+##    Starting MySQL...The server quit without updating PID file [FAILED]b/mysql/localhost.localdomain.pid).
+
 
 
 
