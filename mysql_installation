@@ -3,3 +3,31 @@
 ##2,  yum install gcc
 ##    yum install gcc-c++
 ##    yum install libaio
+
+
+##3,  cd /usr/local/
+##    tar -zvxf /home/star/Downloads/mysql-5.7.14-linux-glibc2.5-x86_64.tar.gz 
+##    mv mysql-5.7.14-linux-glibc2.5-x86_64/ mysql
+##    mkdir mysql/data
+##    groupadd mysql
+##    useradd mysql -g mysql
+##    cd mysql
+##    pwd
+##    /usr/local/mysql
+##
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
