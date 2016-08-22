@@ -71,6 +71,19 @@
 ## reference link: http://www.111cn.net/database/mysql/47258.htm
 
 
+##4, [root@localhost support-files]# cat /root/.mysql_secret
+# Password set for user 'root@localhost' at 2016-08-22 18:15:53 
+haohSUes+_)<
+
+##This is the random password to land on the mysql server, we can use this password to land on mysql
+
+cd /usr/local/mysql/bin
+
+./mysql -u root -p
+Enter password: 
+ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)
+ 
+
 
 
 
