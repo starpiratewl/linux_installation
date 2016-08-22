@@ -24,6 +24,27 @@
 ##    ./mysql.server start
 ##    Starting MySQL...The server quit without updating PID file [FAILED]b/mysql/localhost.localdomain.pid).
 
+##    This error can be fixed by following steps
+##    vi /etc/my.cnf
+##    add "datadir = /usr/local/mysql/data"  below the [mysqld]
+##    The final version my.cnf should like this:
+##[mysqld]
+##datadir=/usr/local/mysql/data
+##socket=/var/lib/mysql/mysql.sock
+##user=mysql
+### Disabling symbolic-links is recommended to prevent assorted security risks
+##symbolic-links=0
+
+##[mysqld_safe]
+##log-error=/var/log/mysqld.log
+##pid-file=/var/run/mysqld/mysqld.pid
+
+##    cd /usr/local/mysql/support-files
+##    ./mysql.server start
+##    Starting MySQL.                                            [  OK  ]
+
+
+
 
 
 
