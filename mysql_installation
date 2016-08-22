@@ -1,0 +1,5 @@
+##1, download mysql community server from http://dev.mysql.com/downloads/mysql/.  select the Linux - Generic (glibc 2.5) (x86, 64-bit), Compressed TAR version. 5.7.14
+
+##2,  yum install gcc
+##    yum install gcc-c++
+##    yum install libaio
