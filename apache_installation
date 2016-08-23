@@ -1,0 +1,38 @@
+1, download httpd-2.4.23.tar.gz from http://httpd.apache.org/, remember to select the tar.gz version
+
+2, 
+[root@localhost support-files]# cd /home/star/Downloads/
+[root@localhost Downloads]# ls
+httpd-2.4.23.tar.gz  mysql-5.7.14-linux-glibc2.5-x86_64.tar.gz  php-5.6.25.tar.gz  php-7.0.10.tar.gz
+[root@localhost Downloads]# tar xfz httpd-2.4.23.tar.gz 
+[root@localhost Downloads]# ls
+httpd-2.4.23         mysql-5.7.14-linux-glibc2.5-x86_64.tar.gz  php-7.0.10.tar.gz
+httpd-2.4.23.tar.gz  php-5.6.25.tar.gz
+[root@localhost Downloads]# cd httpd-2.4.23
+[root@localhost httpd-2.4.23]# ./configure --enable-so --enable-rewrite
+configure: 
+checking for APR... no
+configure: error: APR not found.  Please read the documentation.
+
+This error occurs because we lack of apr（Apache Portable Runtime）, we have to install this first.
+
+3, download apr-1.5.2.tar.gz from http://archive.apache.org/dist/apr/
+
+[root@localhost Downloads]# ls
+apr-1.5.2.tar.gz       httpd-2.4.23.tar.gz                        php-7.0.10.tar.gz
+apr-util-1.5.4.tar.gz  mysql-5.7.14-linux-glibc2.5-x86_64.tar.gz
+httpd-2.4.23           php-5.6.25.tar.gz
+[root@localhost Downloads]# tar -zxvf apr-1.5.2.tar.gz 
+[root@localhost Downloads]# cd apr-1.5.2
+[root@localhost apr-1.5.2]# ./configure --prefix=/usr/local/apr
+[root@localhost apr-1.5.2]# make
+[root@localhost apr-1.5.2]# make install
+
+## apr have been successfully installed,but there is another error:
+
+[root@localhost httpd-2.4.23]# ./configure --enable-so --enable-rewrite
+configure: 
+checking for APR-util... no
+configure: error: APR-util not found.  Please read the documentation.
+
+
