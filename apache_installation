@@ -145,6 +145,9 @@ unix  2      [ ACC ]     STREAM     LISTENING     24149  3780/gconf-im-setti /tm
 
 [root@localhost /]# /usr/local/apache/bin/apachectl start
 
+## sometimes we can start the apache server with configuration files as follows:
+##/usr/local/apache/bin/apachectl -f /usr/local/apache/conf/httpd.conf
+
 ## now we can reopen the localhost page and we will see the change we made to the files.
 
 
