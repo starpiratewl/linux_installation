@@ -122,10 +122,55 @@ chkconfig --add mysqld
 mysqld         	0:off	1:off	2:on	3:on	4:on	5:on	6:off
 
 ## now restart the system, and the mysql server will be initiated.
+[root@localhost support-files]# netstat -anp|grep mysqld
+tcp        0      0 :::3306                     :::*                        LISTEN      2968/mysqld         
+unix  2      [ ACC ]     STREAM     LISTENING     17623  2968/mysqld         /var/lib/mysql/mysql.sock
+## successfully initiated.
+
+## if don't want to initiate the mysql server, we can also initiate the msyql server manually.
+[root@localhost support-files]# service mysqld start
+Starting MySQL                                             [  OK  ]
+
+## to verify if we can land on the msyql server:
+[root@localhost support-files]# /usr/local/mysql/bin/mysql -uroot -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.7.14
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> 
+
+
+## 6, it is boring to land on mysql server through /usr/local/mysql/bin/mysql -u root -p, we can set the environmental variable to fix this.
+方法一： 
+在/etc/profile文件中最后一行添加变量export PATH=$PATH:/usr/local/mysql/bin
+【对所有用户生效（永久的）】  
+用VI在文件/etc/profile文件中增加变量，该变量将会对Linux下所有用户有效，并且是“永久的”。  
+要让刚才的修改马上生效，需要执行以下代码  
+# source /etc/profile  
+
+方法二：  
+在用户目录下的.bash_profile文件中增加变量【对单一用户生效（永久的）】  
+用VI在用户目录下的.bash_profile文件中增加变量，改变量仅会对当前用户有效，并且是“永久的”。  
+要让刚才的修改马上生效，需要在用户目录下执行以下代码  
+# source .bash_profile
+
+方法三：
+直接运行export命令定义变量【只对当前shell（BASH）有效（临时的）】 
+在shell的命令行下直接使用[export变量名=变量值]定义变量，该变量只在当前的shell（BASH）或其子shell（BASH）下是有效的，shell关闭了，变量也就失效了，再打开新shell时就没有这个变量，需要使用的话还需要重新定义。
+例如：export PATH=$PATH:/usr/local/mysql/bin
 
 
 
-## 6,fix the password problem
+## 7,fix the password problem
 
 when we perform SQL query in the mysql, it prompt:
 mysql> show databases;
