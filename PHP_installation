@@ -1,0 +1,49 @@
+1, download php-5.6.25.tar.gz from http://www.php.net/downloads.php
+
+2,
+[root@localhost httpd]# cd /home/star/Downloads/
+[root@localhost Downloads]# ls
+apr-1.5.2              mysql-5.7.14-linux-glibc2.5-x86_64.tar.gz
+apr-1.5.2.tar.gz       pcre-8.39
+apr-util-1.5.4         pcre-8.39.tar.gz
+apr-util-1.5.4.tar.gz  php-5.6.25.tar.gz
+httpd-2.4.23           php-7.0.10.tar.gz
+httpd-2.4.23.tar.gz
+[root@localhost Downloads]# tar xfz php-5.6.25.tar.gz 
+[root@localhost Downloads]# cd php-5.6.25
+
+[root@localhost php-5.6.25]# yum install libxml2-devel
+
+[root@localhost php-5.6.25]# ./configure --prefix=/usr/local/php --with--apxs=/usr/local/apache/bin/apxs --with-mysqli=/usr/local/mysql/bin/mysql_config
+
+[root@localhost php-5.6.25]# make
+
+[root@localhost php-5.6.25]# make install
+
+[root@localhost php-5.6.25]# cp php.ini* /usr/local/php/lib/
+
+[root@localhost php-5.6.25]# cd /usr/local/php/lib/
+
+[root@localhost lib]# cp php.ini-development php.ini
+
+[root@localhost lib]# cd /usr/local/apache/conf/
+
+[root@localhost conf]# gedit httpd.conf 
+
+## made two modifications in this file
+
+##1:
+find the following position, add "index.php"
+<IfModule dir_module>
+    DirectoryIndex index.html index.php
+</IfModule>
+
+##2:
+add following in the end of this file
+<FilesMatch \.php$>
+	SetHandler application/x-httpd-php
+</FilesMatch>
+
+
+
+
