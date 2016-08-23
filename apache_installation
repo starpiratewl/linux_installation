@@ -101,9 +101,22 @@ shoot this error:
 [root@localhost etc]# ln -s /usr/local/apache/bin/apachectl init.d/
 [root@localhost etc]# ln -s /etc/init.d/apachectl rc2.d/S99local
 
+## this seem don't work in my current CentOS environment
 
 
+9, when type 'localhost' in the browser, it did not show "It works!", instead it shows the "Apache test page". Something must be wrong with the apache configuration files.
+shoot the problem:
+[root@localhost bin]# vi /etc/httpd/conf/httpd.conf
 
+## made two modifications in this file
+DocumentRoot "/usr/local/apache/htdocs"
+
+ServerRoot "/usr/local/apache"
+
+[root@localhost bin]# cd /usr/local/apache/bin/
+[root@localhost bin]# apachectl -k restart
+
+## OK , then we see the famous "It works!"
 
 
 
