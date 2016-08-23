@@ -168,6 +168,12 @@ mysql>
 在shell的命令行下直接使用[export变量名=变量值]定义变量，该变量只在当前的shell（BASH）或其子shell（BASH）下是有效的，shell关闭了，变量也就失效了，再打开新shell时就没有这个变量，需要使用的话还需要重新定义。
 例如：export PATH=$PATH:/usr/local/mysql/bin
 
+## then we can directly start mysql in terminal window without specify the path
+[root@localhost support-files]# mysql -r root -p
+Enter password: 
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)
+
+
 
 
 ## 7,fix the password problem
@@ -176,22 +182,51 @@ when we perform SQL query in the mysql, it prompt:
 mysql> show databases;
 ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.
 
+##land on mysql server
+mysql> set password=password('123456');
+Query OK, 0 rows affected, 1 warning (0.19 sec)
+
+## then we can reland on the mysql server with new password
+
+## 8,设定远程登录mysql。在Linux下为了安全，默认是不允许mysql本机以外的机器访问mysql数据库服务，因此需要重新授权root。方便远程访问。
+
+mysql> use mysql;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+
+mysql> select Host,User from user;
++-----------+-----------+
+| Host      | User      |
++-----------+-----------+
+| localhost | mysql.sys |
+| localhost | root      |
++-----------+-----------+
+2 rows in set (0.00 sec)
 
 
+mysql> GRANT ALL PRIVILEGES ON *.* TO root@'%' identified by 'leizm';
+Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 
+mysql> flush privileges;
+Query OK, 0 rows affected (0.00 sec)
+
+##授权语句最后的‘leizm’是mysql数据库root用户的新密码。
 
 
+##9，非必要的步骤，如果远程连不上，估计是防火墙的问题，关闭试试：
 
 
+[root@localhost mysql]# service iptables stop
 
+setenforce 0iptables：将链设置为政策 ACCEPT：filter [确定]
 
+iptables：清除防火墙规则： [确定]
 
+iptables：正在卸载模块： [确定]
 
+[root@localhost mysql]# setenforce 0
 
-
-
-
-
-
-
+setenforce: SELinux is disable 
