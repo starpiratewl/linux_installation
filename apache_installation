@@ -36,3 +36,73 @@ checking for APR-util... no
 configure: error: APR-util not found.  Please read the documentation.
 
 
+4, download apr-util-1.5.4.tar.gz from http://archive.apache.org/dist/apr/
+[root@localhost Downloads]# tar -zxvf apr-util-1.5.4.tar.gz 
+[root@localhost Downloads]# ls
+apr-1.5.2         apr-util-1.5.4.tar.gz  mysql-5.7.14-linux-glibc2.5-x86_64.tar.gz
+apr-1.5.2.tar.gz  httpd-2.4.23           php-5.6.25.tar.gz
+apr-util-1.5.4    httpd-2.4.23.tar.gz    php-7.0.10.tar.gz
+[root@localhost Downloads]# cd apr-util-1.5.4
+[root@localhost apr-util-1.5.4]# ./configure --prefix=/usr/local/apr-util --with-apr=/usr/local/apr
+
+## apr-util has been successfully installed.but there is another error:
+
+[root@localhost httpd-2.4.23]# cd /home/star/Downloads/httpd-2.4.23
+[root@localhost httpd-2.4.23]# ./configure --prefix=/usr/local/apache --with-apr=/usr/local/apr --with-apr-util=/usr/local/apr-util
+configure: error: pcre-config for libpcre not found. PCRE is required and available from http://pcre.org/
+
+
+
+5, download pcre-8.39.tar.gz from https://sourceforge.net/projects/pcre/files/pcre/
+[root@localhost httpd-2.4.23]# cd ..
+[root@localhost Downloads]# ls
+apr-1.5.2         apr-util-1.5.4.tar.gz  mysql-5.7.14-linux-glibc2.5-x86_64.tar.gz  php-7.0.10.tar.gz
+apr-1.5.2.tar.gz  httpd-2.4.23           pcre-8.39.tar.gz
+apr-util-1.5.4    httpd-2.4.23.tar.gz    php-5.6.25.tar.gz
+[root@localhost Downloads]# tar -zxvf pcre-8.39.tar.gz
+[root@localhost Downloads]# ls
+apr-1.5.2         apr-util-1.5.4.tar.gz  mysql-5.7.14-linux-glibc2.5-x86_64.tar.gz  php-5.6.25.tar.gz
+apr-1.5.2.tar.gz  httpd-2.4.23           pcre-8.39                                  php-7.0.10.tar.gz
+apr-util-1.5.4    httpd-2.4.23.tar.gz    pcre-8.39.tar.gz
+[root@localhost Downloads]# cd pcre-8.39
+[root@localhost pcre-8.39]# ./configure --prefix=/usr/local/pcre/
+[root@localhost pcre-8.39]# make
+[root@localhost pcre-8.39]# make install
+
+
+6,  successfully installed apache
+[root@localhost Downloads]# cd httpd-2.4.23
+[root@localhost httpd-2.4.23]# ./configure --prefix=/usr/local/apache/  --with-apr=/usr/local/apr/  --with-apr-util=/usr/local/apr-util/  --with-pcre=/usr/local/pcre/  
+[root@localhost httpd-2.4.23]# make
+[root@localhost httpd-2.4.23]# make install
+
+
+7, test the apache server
+[root@localhost httpd-2.4.23]# cd /usr/local/apache/bin
+[root@localhost bin]# apachectl -k start
+httpd: Could not reliably determine the server's fully qualified domain name, using localhost.localdomain for ServerName
+
+shoot this error:
+[root@localhost local]# vi /etc/httpd/conf/httpd.conf 
+
+## find the #ServerName www.example.com:80
+## add another line below this line: ServerName localhost:80
+
+[root@localhost local]# cd /usr/local/apache/bin
+[root@localhost bin]# apachectl -k start
+[root@localhost bin]# 
+
+## Then we can see the apache server successfully start
+
+
+
+
+
+
+
+
+
+
+
+
+
