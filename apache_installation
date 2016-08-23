@@ -96,6 +96,12 @@ shoot this error:
 
 
 
+8, make the apache server initiated when start
+[root@localhost bin]# cd /etc/
+[root@localhost etc]# ln -s /usr/local/apache/bin/apachectl init.d/
+[root@localhost etc]# ln -s /etc/init.d/apachectl rc2.d/S99local
+
+
 
 
 
