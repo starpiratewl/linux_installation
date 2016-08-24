@@ -20,14 +20,6 @@
 ##    chown -R mysql .
 ##    chgrp -R mysql .
 
-bin/mysqld --initialize --user=mysql
-## prompt error here, it seem that some files have been written, I remember the centos has a default mysql installed, that maybe the problem, so I have to remove the default installed mysql here.
-
-##[root@localhost mysql]# rpm -qa | grep mysql
-##mysql-libs-5.1.73-7.el6.x86_64
-##[root@localhost mysql]# yum remove mysql-libs-5.1.73-7.el6.x86_64
-
-
 
 ##    cd /usr/local/src/mysql/bin
 ##    [root@localhost bin]# ./mysql_install_db --user=mysql --basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data
@@ -252,3 +244,87 @@ iptables：正在卸载模块： [确定]
 [root@localhost mysql]# setenforce 0
 
 setenforce: SELinux is disable 
+
+
+
+
+
+
+
+
+###########################################################################################################################
+## follow the installation instructions from http://dev.mysql.com/doc/refman/5.7/en/binary-installation.html
+###########################################################################################################################
+
+
+shell> groupadd mysql
+shell> useradd -r -g mysql -s /bin/false mysql
+shell> cd /usr/local
+shell> tar zxvf /path/to/mysql-VERSION-OS.tar.gz
+shell> ln -s full-path-to-mysql-VERSION-OS mysql
+shell> cd mysql
+shell> mkdir mysql-files
+shell> chmod 750 mysql-files
+shell> chown -R mysql .
+shell> chgrp -R mysql .
+shell> bin/mysql_install_db --user=mysql    # Before MySQL 5.7.6
+shell> bin/mysqld --initialize --user=mysql # MySQL 5.7.6 and up
+
+## prompt error here, it seem that some files have been written, I remember the centos has a default mysql installed, that maybe the problem, so I have to remove the default installed mysql here.
+
+##[root@localhost mysql]# rpm -qa | grep mysql
+##mysql-libs-5.1.73-7.el6.x86_64
+##[root@localhost mysql]# yum remove mysql-libs-5.1.73-7.el6.x86_64
+
+## after remove this , the installation seems to continue.
+
+[root@localhost mysql]# bin/mysqld --initialize --user=mysql
+2016-08-24T17:23:51.994596Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2016-08-24T17:23:55.124848Z 0 [Warning] InnoDB: New log files created, LSN=45790
+2016-08-24T17:23:55.663441Z 0 [Warning] InnoDB: Creating foreign key constraint system tables.
+2016-08-24T17:23:55.869064Z 0 [Warning] No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: 8923226f-6a1f-11e6-8d71-74f06d78cd91.
+2016-08-24T17:23:55.908715Z 0 [Warning] Gtid table is not ready to be used. Table 'mysql.gtid_executed' cannot be opened.
+2016-08-24T17:23:55.910466Z 1 [Note] A temporary password is generated for root@localhost: -?PY(ALaC4_v
+
+[root@localhost mysql]# bin/mysql_ssl_rsa_setup
+Generating a 2048 bit RSA private key
+.......+++
+...+++
+writing new private key to 'ca-key.pem'
+-----
+Generating a 2048 bit RSA private key
+..................+++
+............................................................................+++
+writing new private key to 'server-key.pem'
+-----
+Generating a 2048 bit RSA private key
+.....................+++
+...+++
+writing new private key to 'client-key.pem'
+-----
+
+shell> chown -R root .
+shell> chown -R mysql data mysql-files
+shell> bin/mysqld_safe --user=mysql &
+# Next command is optional
+shell> cp support-files/mysql.server /etc/init.d/mysql.server
+
+
+[root@localhost mysql]# bin/mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3
+Server version: 5.7.14
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> 
+
+
+## now we have successfully installed the mysql
