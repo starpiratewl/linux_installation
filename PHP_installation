@@ -31,12 +31,12 @@ httpd-2.4.23.tar.gz
 
 [root@localhost conf]# gedit httpd.conf 
 
-## made two modifications in this file
+## made three modifications in this file
 
 ##1:
 find the following position, add "index.php"
 <IfModule dir_module>
-    DirectoryIndex index.html index.php
+    DirectoryIndex index.html index.php3 index.php default.php
 </IfModule>
 
 ##2:
@@ -45,6 +45,9 @@ add following in the end of this file
 	SetHandler application/x-httpd-php
 </FilesMatch>
 
-
+##2:
+find AddType and add following:
+AddType application/x-httpd-php .php .php3 .htm .phtml .php4
+AddType application/x-httpd-php-source .phps
 
 
