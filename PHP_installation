@@ -13,9 +13,10 @@ httpd-2.4.23.tar.gz
 [root@localhost Downloads]# cd php-5.6.25
 
 [root@localhost php-5.6.25]# yum install libxml2-devel
+[root@localhost bin]# yum -y install mysql-devel
 
-[root@localhost php-5.6.25]# ./configure --prefix=/usr/local/php --with--apxs=/usr/local/apache/bin/apxs --with-mysqli=/usr/local/mysql/bin/mysql_config
 
+[root@localhost php-5.6.25]# ./configure --prefix=/usr/local/php --with-apxs2=/usr/local/apache/bin/apxs --with-mysqli=/usr/bin/mysql_config 
 [root@localhost php-5.6.25]# make
 
 [root@localhost php-5.6.25]# make install
