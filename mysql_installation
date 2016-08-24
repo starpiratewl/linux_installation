@@ -284,7 +284,7 @@ shell> bin/mysqld --initialize --user=mysql # MySQL 5.7.6 and up
 2016-08-24T17:23:55.663441Z 0 [Warning] InnoDB: Creating foreign key constraint system tables.
 2016-08-24T17:23:55.869064Z 0 [Warning] No existing UUID has been found, so we assume that this is the first time that this server has been started. Generating a new UUID: 8923226f-6a1f-11e6-8d71-74f06d78cd91.
 2016-08-24T17:23:55.908715Z 0 [Warning] Gtid table is not ready to be used. Table 'mysql.gtid_executed' cannot be opened.
-2016-08-24T17:23:55.910466Z 1 [Note] A temporary password is generated for root@localhost: -?PY(ALaC4_v
+2016-08-24T17:23:55.910466Z 1 [Note] A temporary password is generated for root@localhost: MwfdC6nZqN?A
 
 [root@localhost mysql]# bin/mysql_ssl_rsa_setup
 Generating a 2048 bit RSA private key
