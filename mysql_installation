@@ -4,6 +4,8 @@
 ##    yum install gcc-c++
 ##    yum install libaio
 ##    yum -y install ncurses-devel
+##    yum install libxml2-devel
+##    yum install libxml2
 
 
 ##3,  cd /usr/local/
