@@ -20,6 +20,8 @@
 ##    chown -R mysql .
 ##    chgrp -R mysql .
 
+bin/mysqld --initialize --user=mysql
+## prompt error here, it seem that some files have been written, I remember the centos has a default mysql installed, that maybe the problem, so I have to remove the default installed mysql here.
 
 ##[root@localhost mysql]# rpm -qa | grep mysql
 ##mysql-libs-5.1.73-7.el6.x86_64
