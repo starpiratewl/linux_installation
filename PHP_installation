@@ -51,3 +51,50 @@ AddType application/x-httpd-php .php .php3 .htm .phtml .php4
 AddType application/x-httpd-php-source .phps
 
 
+## for now, php scripts can function in the page, but there is another problem, php can establish connect to mysql!
+## The reason of this seem to be the lack of pdo_mysql.so which can be shown in the phpinfo(), so we have to install the module here
+
+1~ Download the file from http://pecl.php.net/get/PDO_MYSQL-1.0.2.tgz
+2~ cd /home/star/Downloads/
+3~ tar zxvf PDO_MYSQL-1.0.2.tgz 
+4~ cd PDO_MYSQL-1.0.2
+5~ /usr/local/php/bin/phpize
+## here is a problem prompt: 
+Configuring for:
+PHP Api Version:         20100412
+Zend Module Api No:      20100525
+Zend Extension Api No:   220100525
+Cannot find autoconf. Please check your autoconf installation and the $PHP_AUTOCONF environment variable. Then, rerun this script.
+
+##do the following can fix this problem:
+yum install autoconf
+
+6~ /usr/local/php/bin/phpize
+
+##after phpize we can see the configure file in the directory
+7~ ./configure --with-php-config=/usr/local/php/bin/php-config --with-pdo-mysql=/usr/local/mysql/
+8~ make
+#### here is a problem prompt: 
+make: *** [pdo_mysql.lo] Error 1
+
+##do the following can fix this problem:
+ln -s /usr/local/mysql/include/* /usr/local/include/
+ln -s /usr/local/mysql/include/mysql/* /usr/local/include/
+
+9~ make
+10~make install
+
+## two modifications of the php.ini()
+11~ vi /usr/local/php/lib/php.ini
+找到; extension_dir = “./”这一行，去掉注释，并修改路径。
+extension_dir = “/usr/local/php/lib/php/extensions/”
+这里经过我测试，发现php只会从该目录寻找扩展so，而并不寻找该目录下的子目录。所以之前我为了统一管理，把so文件都移动到该目录下。
+
+找到; extension=php_pdo_mysql.dll这一行，去掉注释，并修改后面的文件名。
+extension=pdo_mysql.so
+文件名不太一样，这里要把php_前缀去掉，否则找不到文件。后面的dll是windows下的文件名，我们改成so。
+
+##restart the apache server
+12~ /usr/local/apache/bin/httpd -k restart
+
+
