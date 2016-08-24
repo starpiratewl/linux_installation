@@ -3,6 +3,7 @@
 ##2,  yum install gcc
 ##    yum install gcc-c++
 ##    yum install libaio
+##    yum -y install ncurses-devel
 
 
 ##3,  cd /usr/local/
