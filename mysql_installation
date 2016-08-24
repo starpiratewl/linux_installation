@@ -8,7 +8,7 @@
 ##    yum install libxml2
 
 
-##3,  cd /usr/local/
+##3,  cd /usr/local/src
 ##    tar -zvxf /home/star/Downloads/mysql-5.7.14-linux-glibc2.5-x86_64.tar.gz 
 ##    mv mysql-5.7.14-linux-glibc2.5-x86_64/ mysql
 ##    mkdir mysql/data
@@ -16,14 +16,24 @@
 ##    useradd mysql -g mysql
 ##    cd mysql
 ##    pwd
-##    /usr/local/mysql
+##    /usr/local/src/mysql
 ##    chown -R mysql .
 ##    chgrp -R mysql .
 
-##    cd /usr/local/mysql/bin
-##    ./mysql_install_db --user=mysql --basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data
+##    cd /usr/local/src/mysql/bin
+##    [root@localhost bin]# ./mysql_install_db --user=mysql --basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data
 
-##    cd /usr/local/mysql/support-files
+2016-08-24 12:12:45 [WARNING] mysql_install_db is deprecated. Please consider switching to mysqld --initialize
+2016-08-24 12:13:09 [WARNING] The bootstrap log isn't empty:
+2016-08-24 12:13:09 [WARNING] 2016-08-24T16:12:45.432997Z 0 [Warning] --bootstrap is deprecated. Please consider using --initialize instead
+2016-08-24T16:12:45.433691Z 0 [Warning] Changed limits: max_open_files: 1024 (requested 5000)
+2016-08-24T16:12:45.433700Z 0 [Warning] Changed limits: table_open_cache: 431 (requested 2000)
+
+
+##    [root@localhost mysql]# bin/mysqld_safe --user=mysql &
+
+
+##    cd /usr/local/src/mysql/support-files
 ##    ./mysql.server start
 ##    Starting MySQL...The server quit without updating PID file [FAILED]b/mysql/localhost.localdomain.pid).
 
