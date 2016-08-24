@@ -152,3 +152,10 @@ unix  2      [ ACC ]     STREAM     LISTENING     24149  3780/gconf-im-setti /tm
 
 
 
+
+##############################################################################
+##further_testing
+##############################################################################
+./configure --prefix=/usr/local/apache/ --with-apr=/usr/local/apr/ --with-apr-util=/usr/local/apr-util/ --with-pcre=/usr/local/pcre/ --enable-module=shared --enable-so --enable-rewrite
+
+
