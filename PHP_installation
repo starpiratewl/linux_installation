@@ -162,5 +162,8 @@ Starting MySQL... SUCCESS!
 
 ##then we can see the link in /tmp, and then we can establish the connection to mysql via php.
 
-## it is very boring!
+## it is very boring! And I guess the reason is that I didn't set the msyql initialized，when I perform the support-files/mysql.server start,  this error will evaperate.
+## Let's try to set the mysql to initiate when system started.
+
+
 
