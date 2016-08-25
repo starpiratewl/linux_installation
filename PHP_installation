@@ -149,3 +149,18 @@ PDO drivers 	sqlite, mysql
 
 ## now the error was fixed , and mysql connection can be established.
 
+
+
+
+## but this method pose another problem: because we set a link of /tmp/mysql.sock to /var/lib/mysql/mysql.sock. So everytime we restart the system, the link expires with the mysql.sock in /var/lib/mysql/ expires too.
+## So every time we first start the mysql server with
+[root@localhost mysql]# support-files/mysql.server start
+Starting MySQL... SUCCESS! 
+
+## then 
+[root@localhost mysql]# ln -s /var/lib/mysql/mysql.sock /tmp/mysql.sock
+
+##then we can see the link in /tmp, and then we can establish the connection to mysql via php.
+
+## it is very boring!
+
