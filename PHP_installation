@@ -120,6 +120,32 @@ PDO drivers 	sqlite, mysql
 ##SQLSTATE[HY000] [2002] Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2) 
 
 
+##    This error can be fixed by following steps
+1,    vi /etc/my.cnf
+##    add "datadir = /usr/local/mysql/data"  below the [mysqld]
+##    The final version my.cnf should like this:
+##[mysqld]
+##datadir=/usr/local/mysql/data
+##socket=/var/lib/mysql/mysql.sock
+##user=mysql
+### Disabling symbolic-links is recommended to prevent assorted security risks
+##symbolic-links=0
+
+##[mysqld_safe]
+##log-error=/var/log/mysqld.log
+##pid-file=/var/run/mysqld/mysqld.pid
+
+##    cd /usr/local/mysql/support-files
+##    ./mysql.server start
+##    Starting MySQL.                                            [  OK  ]
 
 
+
+2,ln -s /var/lib/mysql/mysql.sock /tmp/mysql.sock
+
+
+
+##mysql.sock是数据库服务启动的时候自动生成的， 当服务关闭以后，这个文件会自动被删除，所以你查找不到，建议先重启数据库服务。如果重启失败，那么需要检查错误日志查找原因。另外重启前，可以考虑删除var/lib/mysql下面的ib_logfile0、ib_logfile1、ib_logfile2等文件，之后再启动。 
+
+## now the error was fixed , and mysql connection can be established.
 
