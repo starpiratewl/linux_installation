@@ -58,6 +58,8 @@ AddType application/x-httpd-php-source .phps
 2~ cd /home/star/Downloads/
 3~ tar zxvf PDO_MYSQL-1.0.2.tgz 
 4~ cd PDO_MYSQL-1.0.2
+## remember some ones says should cd /home/star/Downloads/php-5.6.25/ext/pdo_mysql/  to execute the following orders, I didn't verify this, but take this note, to see what will happen in the future.
+
 5~ /usr/local/php/bin/phpize
 ## here is a problem prompt: 
 Configuring for:
@@ -78,23 +80,46 @@ yum install autoconf
 make: *** [pdo_mysql.lo] Error 1
 
 ##do the following can fix this problem:
+##
 ln -s /usr/local/mysql/include/* /usr/local/include/
+## 
 ln -s /usr/local/mysql/include/mysql/* /usr/local/include/
 
 9~ make
 10~make install
+## after this step, the terminal will give hint:
+Installing shared extensions:     /usr/local/php/lib/php/extensions/no-debug-zts-20131226/
 
-## two modifications of the php.ini()
+
+## two modifications of the php.ini(The php.ini file is the file indicated in the phpinfo() page)
 11~ vi /usr/local/php/lib/php.ini
 找到; extension_dir = “./”这一行，去掉注释，并修改路径。
-extension_dir = “/usr/local/php/lib/php/extensions/”
+eextension_dir = "/usr/local/php/lib/php/extensions/no-debug-zts-20131226/"
+
 这里经过我测试，发现php只会从该目录寻找扩展so，而并不寻找该目录下的子目录。所以之前我为了统一管理，把so文件都移动到该目录下。
 
 找到; extension=php_pdo_mysql.dll这一行，去掉注释，并修改后面的文件名。
 extension=pdo_mysql.so
 文件名不太一样，这里要把php_前缀去掉，否则找不到文件。后面的dll是windows下的文件名，我们改成so。
 
+extension=php_mysql.dll
+## remove the ; in this line, because all the php_mysql share the driver here.
+
 ##restart the apache server
 12~ /usr/local/apache/bin/httpd -k restart
+
+## now the phpinfo() show that:
+
+PDO
+PDO support	enabled
+PDO drivers 	sqlite, mysql 
+
+
+## for now, pdo_mysql.so module has been successfully installed, but there is another problem, php can establish connect to mysql server!
+## The php error prompt follows:
+##SQLSTATE[HY000] [2002] Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2) 
+
+
+
 
 
