@@ -1,0 +1,5 @@
+su root
+
+yum install  epel-release
+
+yum install R
