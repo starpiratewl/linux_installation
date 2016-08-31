@@ -117,7 +117,7 @@ root (hd0,0)
 到此就全部完成了， 下次开机就可以摆脱U盘启动了。
 
 
-## PROBELM_4
+## PROBLEM_4
 
 ## if we choose the custom layout, there will be another problem lurking. When we do the partition of the disk, especially when we have already installed other systems in the computer , the installation process might prompt the error:"could not allocate requested partitions:not enough free space disk", even though we are performing the right volumn partition.
 
@@ -131,6 +131,15 @@ root (hd0,0)
 http://bbs.hh010.com/thread-273980-1-1.html
 http://blog.sina.com.cn/s/blog_786c7fd70101970v.html
 http://blog.csdn.net/wjeson/article/details/9054331
+
+
+## PROBLEM_5
+
+When we finish arranging the hard disk, the installation will go on the process and present us a boot option selection. But the default option is install the boot in the USB disk, that's why if we don't make any change, we will encounter PROBLEM_3. So we have to set the right boot order, set the first boot device to be the hard disk and the second boot device to be the USB disk.
+
+But after this there still a selection which will also bring some trouble if not carefully treated. On the top of the boot order selection menu, there will be two radiobuttons to choose the boot to fit the MBR or the first sector of the boot partition.  Choose the first sector of the boot partition will keep the windows boot untouched, so when you reboot linux after installation , you will find there is no way to choose and there is no way to boot into linux. It just go straight along to windows.Although this can be fixed in windows with the help of EASYBCD software, but it is boring.
+
+So we should choose the boot to fit the MBR, although it is fitted into MBR, but it will scan out the windows boot option and will show to you. That's exactly what we want.
 
 
 
