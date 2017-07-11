@@ -1,0 +1,15 @@
+centos 6.3用yum安装中文输入法
+
+1.需要root权限，所以要用root登录 ，或su root
+
+2.yum install "@Chinese Support"
+
+3.exit
+
+4.回到桌面，system->preferences->input method
+
+5.如果没有，先注销一下。
+
+6.按照提示添加输入法。
+
+7.最后 再次注销，登录即可。
