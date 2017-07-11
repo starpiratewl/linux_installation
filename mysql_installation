@@ -7,6 +7,19 @@
 ##    yum install libxml2-devel
 ##    yum install libxml2
 
+## be careful when install mysql for the first time. If you have a mysql pre-installed in your Centos,  you have to unintall that mysql to ensure your new version mysql installation.
+## followings are steps to uninstall the pre-installed mysql
+
+rmp -qa | grep -i mysql
+## if the result show some version of mysql, you should remove it
+yum remove mysql-libs-5.1.73-8.el6_8.x86_64
+
+rmp -qa | grep -i mysql
+## try this command again, there is no result, means that we have uninstalled the mysql
+
+chkconfig --list | grep -i mysql
+
+
 
 ##3,  cd /usr/local/src
 ##    tar -zvxf /home/star/Downloads/mysql-5.7.14-linux-glibc2.5-x86_64.tar.gz 
