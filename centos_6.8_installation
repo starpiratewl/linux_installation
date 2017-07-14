@@ -16,6 +16,16 @@
 
 ## The following solutions makes this problem even moore complicated. The reason cause this problem is in the CentOS installation process which ask you to select where to install the "boot loader device". Please remember ther the default option is to install the boot loader on the USB driver, if we ignore this procedure, that's why we can't start the system without the USB driver. So here we have to choose another boot loader, set the boot loader to the hard disk and set the first BIOS driver and the second BIOS driver to the hard disk. And this problem will be settled.
 
+## And there is another detail need attention is the the hard disk partition.
+## usually we use the MBR mode when the disk volumn is less than 2TB, if larger than 2TB we need the GTP mode
+## we have to set the following partions in our custom disk partition strategy(that means we didn't choose the "use all space" option in the installation process)
+## 1,   /boot
+## 2,   /
+## 3,   swap
+## sometimes we have to delete the preinstalled partitions first to make our own partition applicable,so be sure to make all the data backup
+## when creat these partitions, be careful to choose in the "Allowable drivers" area. The default solution is the select hard disk and USB driver all, that will cause some problem in the future installation process, so here we omit the USB driver and only select the hard disk option.
+## when the whole disk partition process were carried on, remember we should leave the USB driver untouched !
+
 
 
 
