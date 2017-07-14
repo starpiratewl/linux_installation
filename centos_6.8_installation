@@ -13,6 +13,12 @@
 
 ## if choose the custom layout, we have to set the partition by ourselves and this error may occur. Because the GRUB might be installed on the USB flash driver instead of the the disk.
 
+
+## The following solutions makes this problem even moore complicated. The reason cause this problem is in the CentOS installation process which ask you to select where to install the "boot loader device". Please remember ther the default option is to install the boot loader on the USB driver, if we ignore this procedure, that's why we can't start the system without the USB driver. So here we have to choose another boot loader, set the boot loader to the hard disk and set the first BIOS driver and the second BIOS driver to the hard disk. And this problem will be settled.
+
+
+
+
 ## Reason: there must be some problem with the GRUB. Fortunately we have method to fix this:
 
 ##Method 1
