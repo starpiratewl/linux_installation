@@ -20,21 +20,38 @@ rmp -qa | grep -i mysql
 chkconfig --list | grep -i mysql
 
 
+##3, the following install procedure is from mysql website
+shell> groupadd mysql
+shell> useradd -r -g mysql -s /bin/false mysql
+shell> cd /usr/local
+shell> tar zxvf /path/to/mysql-VERSION-OS.tar.gz
+shell> ln -s full-path-to-mysql-VERSION-OS mysql
+shell> cd mysql
+shell> mkdir mysql-files
+shell> chmod 750 mysql-files
+shell> chown -R mysql .
+shell> chgrp -R mysql .
+shell> bin/mysql_install_db --user=mysql    # MySQL 5.7.5
+shell> bin/mysqld --initialize --user=mysql # MySQL 5.7.6 and up
+shell> bin/mysql_ssl_rsa_setup              # MySQL 5.7.6 and up
+shell> chown -R root .
+shell> chown -R mysql data mysql-files
+shell> bin/mysqld_safe --user=mysql &
+# Next command is optional
+shell> cp support-files/mysql.server /etc/init.d/mysql.server
 
-##3,  cd /usr/local/src
-##    tar -zvxf /home/star/Downloads/mysql-5.7.14-linux-glibc2.5-x86_64.tar.gz 
-##    mv mysql-5.7.14-linux-glibc2.5-x86_64/ mysql
-##    mkdir mysql/data
-##    groupadd mysql
-##    useradd mysql -g mysql
-##    cd mysql
-##    pwd
-##    /usr/local/src/mysql
-##    chown -R mysql .
-##    chgrp -R mysql .
+## but here we encounter a problem
+## if we start the mysql with "bin/mysqld_safe --user=mysql", the console will stuck in "mysqld_safe Starting mysqld daemon with databases from /usr/local/msyql/data"
+## if we start the mysql with "bin/mysqld_safe --user=root", the error will pump out "mysqld_safe mysqld from pid file /usr/local/mysql/data/localhost.localdomain.pid ended"
 
 
-##    cd /usr/local/src/mysql/bin
+
+
+
+
+
+
+##    cd /usr/local/mysql/bin
 ##    [root@localhost bin]# ./mysql_install_db --user=mysql --basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data
 
 2016-08-24 12:12:45 [WARNING] mysql_install_db is deprecated. Please consider switching to mysqld --initialize
