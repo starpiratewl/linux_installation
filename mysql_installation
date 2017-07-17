@@ -200,6 +200,19 @@ shell> msyql -u root -p
 ## now we can land the mysql database in shell
 
 
+#########################################################################################################################
+## set the mysql server to allow the remote access
+#########################################################################################################################
+shell> mysql -u root -p
+mysql> show databases;
+mysql> use mysql;
+mysql> update user set host = '%' where user = 'root';
+
+## restart the mysql server
+shell>/usr/local/mysql/support-files/mysql.server restart
+
+## test the remote access
+
 
 
 
