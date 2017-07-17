@@ -207,6 +207,15 @@ shell> msyql -u root -p
 
 
 
+
+
+
+
+###################################################################################################################
+## followings are old installation reference, not very useful in mysql 5.7.18 installation
+## but I want keep it because some thinking in solve the mysql problem in Linux are very common in other problems
+###################################################################################################################
+
 ##    cd /usr/local/mysql/bin
 ##    [root@localhost bin]# ./mysql_install_db --user=mysql --basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data
 
