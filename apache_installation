@@ -116,6 +116,11 @@ ServerRoot "/usr/local/apache"
 [root@localhost bin]# cd /usr/local/apache/bin/
 [root@localhost bin]# apachectl -k restart
 
+## here I encounter a problem which shows that the port 80 has been taken
+## I don't know how to solve the problem, but restart the system solve this
+
+
+
 ## OK , then we see the famous "It works!"
 
 
