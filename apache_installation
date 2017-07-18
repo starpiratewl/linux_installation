@@ -72,10 +72,10 @@ apr-util-1.5.4    httpd-2.4.23.tar.gz    pcre-8.39.tar.gz
 
 6,  successfully installed apache
 [root@localhost Downloads]# cd httpd-2.4.23
-[root@localhost httpd-2.4.23]# ./configure --prefix=/usr/local/apache/  --with-apr=/usr/local/apr/  --with-apr-util=/usr/local/apr-util/  --with-pcre=/usr/local/pcre/  
+[root@localhost httpd-2.4.23]# ./configure --enable-so --prefix=/usr/local/apache/  --with-apr=/usr/local/apr/  --with-apr-util=/usr/local/apr-util/  --with-pcre=/usr/local/pcre/  
 [root@localhost httpd-2.4.23]# make
 [root@localhost httpd-2.4.23]# make install
-
+## remember here we should not omit the "--enable-so" here, if we dont't add this, the installation process will not add many modules in the apache modules directory(including the php modules) which will cause many problems in future LAMP environment. So we can not omit it here!!!!!!
 
 7, test the apache server
 [root@localhost httpd-2.4.23]# cd /usr/local/apache/bin
