@@ -51,6 +51,15 @@ AddType application/x-httpd-php .php .php3 .htm .phtml .php4
 AddType application/x-httpd-php-source .phps
 
 
+## after these settings, we start the apache2 server and successfully visit the "localhost"(which shows It works!)
+## But after we create a index.php file in /usr/local/apache2/htdocs, the content is "<?php phpinfo(); ?>", when we visit the localhost/index.php, it prompt to download the index.php file!
+
+
+
+
+
+
+
 ## for now, php scripts can function in the page, but there is another problem, php can establish connect to mysql!
 ## The reason of this seem to be the lack of pdo_mysql.so which can be shown in the phpinfo(), so we have to install the module here
 
