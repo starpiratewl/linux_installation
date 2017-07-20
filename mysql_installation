@@ -40,7 +40,9 @@ shell> chown -R mysql .
 shell> chgrp -R mysql .
 
 ################################
-##
+## before we start the initialize process, we have to first set the my_default.cnf file in support_files directory
+## and then cp the my_deault.cnf as /etc/my.cnf
+## this have to be done before initialize process, or the mysql can not start with a PID error
 ################################
 
 shell> bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data 
