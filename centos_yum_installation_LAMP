@@ -77,34 +77,153 @@ vi /var/www/html/info.php
 ## MariaDB (MySQL)
 ################################################################################################################
 
+## MariaDB-libs has been installed in CentOS 7 defaultly
+rpm -qa | grep maria
+## mariadb-libs-5.5.56-2.el7.x86_64
+## we have used the software update tools in CentOS 7 , so it will be the updated version
+
+## so we install the other three packages, mariadb, mariadb-server, mariadb-devel
+yum install mariadb mariadb-server mariadb-devel
+
+## start the MariaDB 
+systemctl start  mariadb 
+
+## enable the starting up initiative
+systemctl enable  mariadb 
+##Created symlink from /etc/systemd/system/multi-user.target.wants/mariadb.service to /usr/lib/systemd/system/mariadb.service.
+
+## check the MariaDB status
+systemctl status  mariadb 
+
+##● mariadb.service - MariaDB database server
+##   Loaded: loaded (/usr/lib/systemd/system/mariadb.service; enabled; vendor preset: disabled)
+##   Active: active (running) since Wed 2017-12-20 07:06:48 EST; 38s ago
+## Main PID: 12585 (mysqld_safe)
+##   CGroup: /system.slice/mariadb.service
+##           ├─12585 /bin/sh /usr/bin/mysqld_safe --basedir=/usr
+##           └─12747 /usr/libexec/mysqld --basedir=/usr --datadir=/var/lib/mysql --plugin-dir=/usr/lib64...
+##
+##Dec 20 07:06:44 localhost.localdomain mariadb-prepare-db-dir[12503]: MySQL manual for more instructions.
+##Dec 20 07:06:44 localhost.localdomain mariadb-prepare-db-dir[12503]: Please report any problems at ht...a
+##Dec 20 07:06:44 localhost.localdomain mariadb-prepare-db-dir[12503]: The latest information about Mar....
+##Dec 20 07:06:44 localhost.localdomain mariadb-prepare-db-dir[12503]: You can find additional informat...:
+##Dec 20 07:06:44 localhost.localdomain mariadb-prepare-db-dir[12503]: http://dev.mysql.com
+##Dec 20 07:06:44 localhost.localdomain mariadb-prepare-db-dir[12503]: Consider joining MariaDB's stron...:
+##Dec 20 07:06:44 localhost.localdomain mariadb-prepare-db-dir[12503]: https://mariadb.org/get-involved/
+##Dec 20 07:06:44 localhost.localdomain mysqld_safe[12585]: 171220 07:06:44 mysqld_safe Logging to '/v...'.
+##Dec 20 07:06:44 localhost.localdomain mysqld_safe[12585]: 171220 07:06:44 mysqld_safe Starting mysql...ql
+##Dec 20 07:06:48 localhost.localdomain systemd[1]: Started MariaDB database server.
+##Hint: Some lines were ellipsized, use -l to show in full.
+
+
+netstat -tulp
+
+##Active Internet connections (only servers)
+##Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+##tcp        0      0 0.0.0.0:sunrpc          0.0.0.0:*               LISTEN      1/systemd           
+##tcp        0      0 localhost.locald:domain 0.0.0.0:*               LISTEN      1419/dnsmasq        
+##tcp        0      0 0.0.0.0:ssh             0.0.0.0:*               LISTEN      1154/sshd           
+##tcp        0      0 localhost:ipp           0.0.0.0:*               LISTEN      1156/cupsd          
+##tcp        0      0 localhost:smtp          0.0.0.0:*               LISTEN      1457/master
+## here is the mysqld process##################################################################
+##tcp        0      0 0.0.0.0:mysql           0.0.0.0:*               LISTEN      12747/mysqld        
+##tcp6       0      0 [::]:sunrpc             [::]:*                  LISTEN      1/systemd           
+##tcp6       0      0 [::]:http               [::]:*                  LISTEN      11961/httpd         
+##tcp6       0      0 [::]:ssh                [::]:*                  LISTEN      1154/sshd           
+##tcp6       0      0 localhost:ipp           [::]:*                  LISTEN      1156/cupsd          
+##tcp6       0      0 localhost:smtp          [::]:*                  LISTEN      1457/master         
+##udp        0      0 0.0.0.0:12602           0.0.0.0:*                           954/dhclient        
+##udp        0      0 0.0.0.0:mdns            0.0.0.0:*                           733/avahi-daemon: r 
+##udp        0      0 0.0.0.0:40450           0.0.0.0:*                           733/avahi-daemon: r 
+##udp        0      0 localhost.locald:domain 0.0.0.0:*                           1419/dnsmasq        
+##udp        0      0 0.0.0.0:bootps          0.0.0.0:*                           1419/dnsmasq        
+##udp        0      0 0.0.0.0:bootpc          0.0.0.0:*                           954/dhclient        
+##udp        0      0 localhost:323           0.0.0.0:*                           765/chronyd         
+##udp6       0      0 [::]:35806              [::]:*                              954/dhclient        
+##udp6       0      0 localhost:323           [::]:*                              765/chronyd  
+
+
+## safegard the mariadb
+
+mysql_secure_installation
+
+##1 enter current password for root(enter for none):
+##press enter here
+
+##2 set root password: 
+## press Y here
+## set the password
+
+##3 remove anonymous users?
+## press Y here
+
+##4 Disallow root login remotely? [Y/n]
+## press n here
+
+##5 Remove test database and access to it?
+## press Y here
+
+##6 Reload privilege tables now?
+## press Y here
+
+##All done!  If you've completed all of the above steps, your MariaDB
+##installation should now be secure.
+##
+##Thanks for using MariaDB!
 
 
 
+## land on the MariaDB and test it!
+mysql -u root -p
+
+##Enter password: 
+##Welcome to the MariaDB monitor.  Commands end with ; or \g.
+##Your MariaDB connection id is 9
+##Server version: 5.5.56-MariaDB MariaDB Server
+##
+##Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
+##
+##Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+##
+##MariaDB [(none)]> 
+##MariaDB [(none)]> show databases;
+##+--------------------+
+##| Database           |
+##+--------------------+
+##| information_schema |
+##| mysql              |
+##| performance_schema |
+##+--------------------+
+##3 rows in set (0.00 sec)
 
 
+################################################################################################################
+## set the PHP
+################################################################################################################
+
+## test the installaton of PHP above mentioned steps
+rpm -ql php
+##/etc/httpd/conf.d/php.conf
+##/etc/httpd/conf.modules.d/10-php.conf
+##/usr/lib64/httpd/modules/libphp5.so
+##/usr/share/httpd/icons/php.gif
+##/var/lib/php/session
 
 
+## connect the php and mysql
+
+yum install php-mysql
+
+rpm -ql php-mysql
+##/etc/php.d/mysql.ini
+##/etc/php.d/mysqli.ini
+##/etc/php.d/pdo_mysql.ini
+##/usr/lib64/php/modules/mysql.so
+##/usr/lib64/php/modules/mysqli.so
+##/usr/lib64/php/modules/pdo_mysql.so
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## installation of php moduels
 
 
 
