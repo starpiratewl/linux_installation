@@ -1,0 +1,4 @@
+## in Centos7 we use yum installation to construct the LAMP
+## MySQL is substtuted by MariaDB because MySQL is acquired by Oracle
+
+
