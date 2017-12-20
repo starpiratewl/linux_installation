@@ -224,6 +224,36 @@ rpm -ql php-mysql
 
 
 ## installation of php moduels
+yum install -y php-gd php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-snmp php-soap curl curl-devel php-bcmath
+
+
+## test the PHP
+
+cd  /var/www/html/
+ls
+pwd
+/var/www/html
+
+vi info.php
+
+<?php
+        phpinfo();
+?>
+~     
+
+## restart the apache
+systemctl restart httpd.service
+
+## test the php again
+## visit the address/info.php to see if the modeuls has been installed
+
+
+## now we have installed the LAMP!!!!!!!!!!
+
+
+
+
+
 
 
 
