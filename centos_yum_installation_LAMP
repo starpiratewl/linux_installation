@@ -2,3 +2,114 @@
 ## MySQL is substtuted by MariaDB because MySQL is acquired by Oracle
 
 
+################################################################################################################3
+## apache
+################################################################################################################
+
+
+## install apache
+yum -y install httpd
+
+## start the apache service
+systemctl start httpd.service
+
+## enable the service start when starting up
+systemctl enable httpd.service
+
+## find the ip address, and try to access this address
+ip addr
+1##: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1
+##    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+##    inet 127.0.0.1/8 scope host lo
+##       valid_lft forever preferred_lft forever
+##    inet6 ::1/128 scope host 
+##       valid_lft forever preferred_lft forever
+##2: enp7s0f5: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast state DOWN qlen 1000
+##    link/ether bc:ae:c5:0e:a6:65 brd ff:ff:ff:ff:ff:ff
+##3: wlp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP qlen 1000
+##    link/ether 48:5d:60:73:69:76 brd ff:ff:ff:ff:ff:ff
+##    inet 192.168.1.102/24 brd 192.168.1.255 scope global dynamic wlp3s0
+##       valid_lft 6459sec preferred_lft 6459sec
+##    inet6 fe80::83d:42f5:4aef:102/64 scope link 
+##       valid_lft forever preferred_lft forever
+##4: virbr0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN qlen 1000
+##    link/ether 52:54:00:01:34:7f brd ff:ff:ff:ff:ff:ff
+##    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0
+##       valid_lft forever preferred_lft forever
+##5: virbr0-nic: <BROADCAST,MULTICAST> mtu 1500 qdisc pfifo_fast master virbr0 state DOWN qlen 1000
+##    link/ether 52:54:00:01:34:7f brd ff:ff:ff:ff:ff:ff
+
+## here we find the ip address is 192.168.1.102, and try to access this address in the explorer, and it showed TESTING 123 page
+
+## if we can not access this address from outer net, try following steps
+firewall-cmd --permanent --zone=public --add-service=http
+firewall-cmd --permanent --zone=public --add-service=https
+firewall-cmd --reload
+
+## after doing this, we can access this website from outer net
+
+
+
+
+################################################################################################################
+## PHP
+################################################################################################################
+
+
+## php installation
+yum -y install php
+
+## restart the httpd service 
+systemctl restart httpd
+systemctl restart httpd.service
+
+
+## test the php installation
+vi /var/www/html/info.php
+## writting the follwoing codes
+<?php phpinfo(); ?>
+## wq save and quit vi
+
+## test this address from outer net via 192.168.1.102/info.php
+## If it shows some php information, it means php has been installed
+
+################################################################################################################
+## MariaDB (MySQL)
+################################################################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
