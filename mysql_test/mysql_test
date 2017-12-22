@@ -1,1 +1,163 @@
+mysql -u root -p
+
+db
+
+############################################################################################################################ 
+## create database and setup tables
+
+create database ijdb;
+##Query OK, 1 row affected (0.00 sec)
+
+use ijdb;
+
+create table joke( 
+id int not null auto_increment primary key, 
+joketext text, jokedate date not null 
+) default character set utf8;
+##Query OK, 0 rows affected (0.17 sec)
+
+## engine = InnoDB
+## this option is provided in the 5th edition of PHP&MySQL Novice to Ninja
+
+show tables;
+##+----------------+
+##| Tables_in_ijdb |
+##+----------------+
+##| joke           |
+##+----------------+
+##1 row in set (0.00 sec)
+
+
+describe joke;
++----------+---------+------+-----+---------+----------------+
+| Field    | Type    | Null | Key | Default | Extra          |
++----------+---------+------+-----+---------+----------------+
+| id       | int(11) | NO   | PRI | NULL    | auto_increment |
+| joketext | text    | YES  |     | NULL    |                |
+| jokedate | date    | NO   |     | NULL    |                |
++----------+---------+------+-----+---------+----------------+
+3 rows in set (0.13 sec)
+
+
+
+
+############################################################################################################################ 
+## inserting data into a table
+
+insert into joke set joketext = "Why did the chicken cross the road? To get to the other side!", jokedate = "2012-04-01";
+##Query OK, 1 row affected (0.01 sec)
+
+insert into joke set joketext = 'Knock-knock! Who \'s there? Boo! "Boo" who? Don\'t cry; it\'s only a jooke!', jokedate = "2012-04-01";
+##Query OK, 1 row affected (0.15 sec)
+
+
+############################################################################################################################ 
+## viewing stored data
+select * from joke;
+##+----+--------------------------------------------------------------------------+------------+
+##| id | joketext                                                                 | jokedate   |
+##+----+--------------------------------------------------------------------------+------------+
+##|  1 | Why did the chicken cross the road? To get to the other side!            | 2012-04-01 |
+##|  2 | Knock-knock! Who 's there? Boo! "Boo" who? Don't cry; it's only a jooke! | 2012-04-01 |
+##+----+--------------------------------------------------------------------------+------------+
+##2 rows in set (0.00 sec)
+
+
+select id, jokedate from joke;
+##+----+------------+
+##| id | jokedate   |
+##+----+------------+
+##|  1 | 2012-04-01 |
+##|  2 | 2012-04-01 |
+##+----+------------+
+##2 rows in set (0.00 sec)
+
+
+select id, left(joketext, 20), jokedate from joke;
+##+----+----------------------+------------+
+##| id | left(joketext, 20)   | jokedate   |
+##+----+----------------------+------------+
+##|  1 | Why did the chicken  | 2012-04-01 |
+##|  2 | Knock-knock! Who 's  | 2012-04-01 |
+##+----+----------------------+------------+
+##2 rows in set (0.00 sec)
+
+
+select count(*) from joke;
+##+----------+
+##| count(*) |
+##+----------+
+##|        2 |
+##+----------+
+##1 row in set (0.14 sec)
+
+
+select count(*) from joke where jokedate >= "2012-01-01";
+##+----------+
+##| count(*) |
+##+----------+
+##|        2 |
+##+----------+
+##1 row in set (0.00 sec)
+
+select count(*) from joke where jokedate >= "2012-05-01";
+##+----------+
+##| count(*) |
+##+----------+
+##|        0 |
+##+----------+
+##1 row in set (0.00 sec)
+
+
+select joketext from joke where joketext like "%chicken%";
+##+---------------------------------------------------------------+
+##| joketext                                                      |
+##+---------------------------------------------------------------+
+##| Why did the chicken cross the road? To get to the other side! |
+##+---------------------------------------------------------------+
+##1 row in set (0.00 sec)
+
+
+select joketext from joke where
+    -> joketext like "%knock%" and
+    -> jokedate >= "2012-04-01" and
+    -> jokedate < "2012-05-01";
++--------------------------------------------------------------------------+
+| joketext                                                                 |
++--------------------------------------------------------------------------+
+| Knock-knock! Who 's there? Boo! "Boo" who? Don't cry; it's only a jooke! |
++--------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+
+############################################################################################################################ 
+## modifying stored data
+
+update joke set jokedate = "2013-04-01" where id = "1";
+##Query OK, 1 row affected (0.06 sec)
+##Rows matched: 1  Changed: 1  Warnings: 0
+
+
+update joke set jokedate = "2010-04-01" where joketext like "%chicken%";
+##Query OK, 1 row affected (0.09 sec)
+##Rows matched: 1  Changed: 1  Warnings: 0
+
+############################################################################################################################ 
+## deleting stored data
+
+
+delete from joke where joketext like "%chicken%";
+##Query OK, 1 row affected (0.02 sec)
+
+## see ? it indeed delete the record from the database, so be very careful of useing this delete command
+select * from joke;
++----+--------------------------------------------------------------------------+------------+
+| id | joketext                                                                 | jokedate   |
++----+--------------------------------------------------------------------------+------------+
+|  2 | Knock-knock! Who 's there? Boo! "Boo" who? Don't cry; it's only a jooke! | 2012-04-01 |
++----+--------------------------------------------------------------------------+------------+
+1 row in set (0.00 sec)
+
+
+
 
