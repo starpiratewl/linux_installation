@@ -167,6 +167,8 @@ vi name.php
 ## This practice tell us the following points:
 ## 1. we use "post" method in html
 ## 2. we use "$_POST()" function in php
+## 3. we can also use "$_REQUEST()" function in php to receive the passing values
+
 
 vi form_name.html
 ##<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
